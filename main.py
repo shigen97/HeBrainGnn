@@ -11,6 +11,10 @@ from graph_preprocessing import load_dataloader
 from sklearn.metrics import log_loss
 import argparse
 
+def adjust_learning_rate(opt, lr):
+    for param_group in opt.param_groups:
+        param_group["lr"] = param_group["lr"] * lr
+    return opt
 
 def mask_prediction(x_train, y_train, x_test, y_test, x_val=None, y_val=None):
     model = LogisticRegression(solver='liblinear', C=1)
@@ -89,6 +93,9 @@ def train_HeBrainGnn(args, train, test):
                 optimizer2.step()
             epoch_loss += loss.item()
         losses.append(epoch_loss / (step + 1))
+        
+        if epoch >= 35 and epoch % 5 == 0:
+            adjust_learning_rate(optimizer2, 0.25)
 
         if epoch <= pre_epoch:
             with torch.no_grad():
