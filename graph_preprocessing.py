@@ -104,12 +104,6 @@ def load_dataloader(train, test, bacth_size=64, val=None):
     labels = pickle.load(open('labels.pkl', 'rb'))[idx]
     labels[labels != 0] = 1
 
-    x_FC = mat2vec(FCs)
-    feat_idx = feature_selection(x_FC, labels, train, 22000)
-    x_FC[:, feat_idx] = 0
-    FCs = vec2mat(x_FC)
-
-
     train_FCs, train_SCs = FCs[train], SCs[train]
     test_FCs, test_SCs = FCs[test], SCs[test]
 
