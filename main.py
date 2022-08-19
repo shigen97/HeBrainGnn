@@ -168,7 +168,7 @@ for fold, (train, test) in enumerate(skf.split(np.zeros(labels.shape), labels)):
     accs.append(acc)
     f1s.append(f1)
 
-print('accuracy: ', np.mean(accs), 'f1: ', np.mean(f1s))
+print('accuracy: ', np.mean(accs), np.std(accs), 'f1: ', np.mean(f1s), np.std(f1s))
 
 
 
