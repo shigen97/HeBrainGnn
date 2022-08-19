@@ -101,7 +101,7 @@ def load_dataloader(train, test, bacth_size=64, val=None):
     SCs = pickle.load(open('SC.pkl', 'rb'))
     SCs = np.log(SCs + 1)
     SCs = SCs / np.max(SCs, (1, 2)).reshape(-1, 1, 1)
-    labels = pickle.load(open('labels.pkl', 'rb'))[idx]
+    labels = pickle.load(open('labels.pkl', 'rb'))
     labels[labels != 0] = 1
 
     train_FCs, train_SCs = FCs[train], SCs[train]
